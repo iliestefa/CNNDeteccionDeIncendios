@@ -4,9 +4,9 @@ import numpy as np
 from Constantes import class_names, batch_size, img_height, img_width
 
 #Se importa el/los modelo/s creado/s--------------------------------------------------------------------------------------------------------
-model = keras.models.load_model("models/modelIliana.h5")
+#model = keras.models.load_model("models/modelIliana.h5")
 modelTony = keras.models.load_model("models/modelTony.h5")
-modelSesme = keras.models.load_model("models/modelSesme.h5")
+#modelSesme = keras.models.load_model("models/modelSesme.h5")
 
 
 #Se descarga la imagen----------------------------------------------------------------------------------------------------------------------
@@ -23,12 +23,6 @@ img_array = tf.expand_dims(img_array, 0) # Create a batch
 
 
 #Se predice un resultado-------------------------------------------------------------------------------------------------------------------
-predictions = model.predict(img_array)
-score = tf.nn.softmax(predictions[0])
-print(
-    "Iliana: This image most likely belongs to {} with a {:.2f} percent confidence."
-    .format(class_names[np.argmax(score)], 100 * np.max(score))
-)
 
 predictions = modelTony.predict(img_array)
 score = tf.nn.softmax(predictions[0])
@@ -37,9 +31,18 @@ print(
     .format(class_names[np.argmax(score)], 100 * np.max(score))
 )
 
+'''
 predictions = modelSesme.predict(img_array)
 score = tf.nn.softmax(predictions[0])
 print(
     "Sesme :This image most likely belongs to {} with a {:.2f} percent confidence."
     .format(class_names[np.argmax(score)], 100 * np.max(score))
 )
+
+predictions = model.predict(img_array)
+score = tf.nn.softmax(predictions[0])
+print(
+    "Iliana: This image most likely belongs to {} with a {:.2f} percent confidence."
+    .format(class_names[np.argmax(score)], 100 * np.max(score))
+)
+'''
